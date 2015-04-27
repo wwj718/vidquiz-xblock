@@ -215,9 +215,7 @@ function VideoQuiz(runtime, element) {
                 // Code below is for direct links to video files - no longer used
                 // var corn = Popcorn(".vid_lecture");
 
-                var wrapper = Popcorn.HTMLYouTubeVideoElement(".vid_lecture");
-                wrapper.src = "//www.youtube.com/embed/" + vid_url.split("https://www.youtube.com/watch?v=")[1] + "?controls=2";
-                var corn = Popcorn(wrapper);
+                var corn = Popcorn(".vid_lecture");
 
                 // Add statistics to be show at the end of the video
                 corn.cue(0.001, function() {
