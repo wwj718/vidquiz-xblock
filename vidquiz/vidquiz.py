@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import pkg_resources
 
 from xblock.core import XBlock
@@ -12,6 +14,11 @@ from django.shortcuts import render_to_response
 from .utils import render_template, load_resource
 
 import urllib
+
+##################mako
+from mako.template import Template
+import os
+##################
 
 class QuizQuestion():
     """This object contains the contents of a quiz question/problem."""
@@ -409,24 +416,43 @@ class VideoQuiz(XBlock):
         print("Answers: " + str(self.answers))
         print("Results: " + str(self.results))  # we should see only 0s here
 
+        mako_template = Template(filename=os.path.dirname(__file__)+"/templates/html/vidquiz.html")
+        #参数是页面可读取的
+        html_str = mako_template.render_unicode(self=self)
+        fragment = Fragment(html_str)
+        # 载入css文件
+        mako_css_template = Template(filename=os.path.dirname(__file__)+"/static/css/vidquiz.css")
+        fragment.add_css(mako_css_template.render_unicode())
+        #载入js
+        mako_js_template = Template(filename=os.path.dirname(__file__)+"/static/js/vidquiz.js")
+        fragment.add_javascript(mako_js_template.render_unicode())
+        '''
         fragment = Fragment()
         fragment.add_content(render_template('templates/html/vidquiz.html', {'self': self}))
         fragment.add_css(load_resource('static/css/vidquiz.css'))
         fragment.add_javascript(load_resource('static/js/vidquiz.js'))
         fragment.initialize_js('VideoQuiz')
-
+        '''
         return fragment
 
     def studio_view(self, context=None):
         """
         The studio view of VideoQuiz, shown to course authors.
         """
-
+        mako_template = Template(filename=os.path.dirname(__file__)+"/templates/html/vidquiz_studio.html")
+        html_str = mako_template.render_unicode(self=self)
+        fragment = Fragment(html_str)
+        mako_css_template = Template(filename=os.path.dirname(__file__)+"/static/css/vidquiz_studio.css")
+        fragment.add_css(mako_css_template.render_unicode())
+        #add js
+        mako_js_template = Template(filename=os.path.dirname(__file__)+"/static/js/vidquiz_studio.js")
+        fragment.add_javascript(mako_js_template.render_unicode())
+        '''
         fragment = Fragment()
         fragment.add_content(render_template('templates/html/vidquiz_studio.html', {'self': self}))
         fragment.add_css(load_resource('static/css/vidquiz_studio.css'))
         fragment.add_javascript(load_resource('static/js/vidquiz_studio.js'))
-
+        '''
         fragment.initialize_js('VideoQuizStudio')
 
         return fragment

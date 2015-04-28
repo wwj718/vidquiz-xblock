@@ -1,6 +1,6 @@
 <div class="vidquiz_block">
 
-    <div class="vq_header"><span>{{self.vq_header}}</span></div>
+    <div class="vq_header"><span>${self.vq_header}</span></div>
 
     <br>
 
@@ -8,11 +8,11 @@
 
         <!-- Video player affected by Popcorn.js -->
         <video class="vid_lecture" height="540px" width="720px" controls>
-            <source class="vidsrc" src="{{self.vid_url}}">
+            <source class="vidsrc" src="${self.vid_url}">
         </video>
 
         <!-- Space that will store YouTube video -->
-        <!--<div class="vid_lecture" style="width: {{self.width}}; height: {{self.height}}px;" ></div>-->
+        <!--<div class="vid_lecture" style="width: ${self.width}; height: ${self.height}px;" ></div>-->
     </div>
 
     <!-- Question form to be displayed for each question -->
