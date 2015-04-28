@@ -350,9 +350,7 @@ class VideoQuiz(XBlock):
         # if some data is sent in, update it
         if len(data) > 0:
             #检测编码类型
-            data_type = type(data["vq_header"])
-            print data_info
-            logging.critical(("wwj",data_type,data_info))
+            #print data_info
             # There is no validation! Enter your data carefully!
             self.vq_header = (data["vq_header"])
             self.display_name = (data["vq_header"])
@@ -361,11 +359,11 @@ class VideoQuiz(XBlock):
             # self.height = data["height"]
             # self.width = data["width"]
 
-            print("submitted data")
-            print("Title: " + data["vq_header"])
-            print("Quiz data: " + data["quiz_content"])
-            print("Video URL: " + data["vid_url"])
-            # print("Video size: " + data["width"] + "x" + data["height"] + "px")
+            #print("submitted data")
+            #print("Title: " + data["vq_header"])
+            #print("Quiz data: " + data["quiz_content"])
+            #print("Video URL: " + data["vid_url"])
+            # #print("Video size: " + data["width"] + "x" + data["height"] + "px")
 
         # prepare current module parameters for return
         content = {
@@ -387,19 +385,19 @@ class VideoQuiz(XBlock):
         The primary view of VideoQuiz, shown to students.
         """
 
-        print("Loading Student View")
-        print("====================")
-        print(">> Parameters: ")
-        print(self.quiz_content)
-        print(self.vid_url)
-        # print(self.width)
-        # print(self.height)
+        #print("Loading Student View")
+        #print("====================")
+        #print(">> Parameters: ")
+        #print(self.quiz_content)
+        #print(self.vid_url)
+        # #print(self.width)
+        # #print(self.height)
 
         # load contents of quiz if any, otherwise this is just a YouTube video player
         if self.quiz_content != "":
-            print("Quiz Array: ")
-            print(self.get_quiz())
-            print("Quiz Length: " + str(self.get_quiz_len()))
+            #print("Quiz Array: ")
+            #print(self.get_quiz())
+            #print("Quiz Length: " + str(self.get_quiz_len()))
 
             # Populate array of results for this session
             if len(self.results) < self.get_quiz_len():
@@ -411,8 +409,8 @@ class VideoQuiz(XBlock):
                 for i in range(0, self.get_quiz_len()):
                     self.results[i] = 0
 
-        print("Answers: " + str(self.answers))
-        print("Results: " + str(self.results))  # we should see only 0s here
+        #print("Answers: " + str(self.answers))
+        #print("Results: " + str(self.results))  # we should see only 0s here
 
         fragment = Fragment()
         fragment.add_content(render_template('templates/html/vidquiz.html', {'self': self}))
