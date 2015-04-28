@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- 
 import pkg_resources
 
 from xblock.core import XBlock
@@ -12,7 +13,8 @@ from django.shortcuts import render_to_response
 from .utils import render_template, load_resource
 
 import urllib
-
+import chardet
+import logging
 class QuizQuestion():
     """This object contains the contents of a quiz question/problem."""
 
@@ -347,10 +349,13 @@ class VideoQuiz(XBlock):
 
         # if some data is sent in, update it
         if len(data) > 0:
-
+            #检测编码类型
+            data_type = type(data["vq_header"])
+            print data_info
+            logging.critical(("wwj",data_type,data_info))
             # There is no validation! Enter your data carefully!
-            self.vq_header = data["vq_header"]
-            self.display_name = data["vq_header"]
+            self.vq_header = (data["vq_header"])
+            self.display_name = (data["vq_header"])
             self.quiz_content = data["quiz_content"]
             self.vid_url = data["vid_url"]
             # self.height = data["height"]
